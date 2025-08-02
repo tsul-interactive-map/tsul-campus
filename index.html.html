@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Интерактивная карта TSUL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)), url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .hidden {
+      display: none;
+    }
+    .fade {
+      transition: all 0.4s ease-in-out;
+    }
+    .fade.hidden {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+    .fade.show {
+      opacity: 1;
+      max-height: 1000px;
+    }
+  </style>
+  <script>
+    let currentLang = 'ru';
+    const translations = {
+      ru: {
+        title: 'Интерактивная карта TSUL',
+        subtitle: '50 точек в университете, которые должен знать каждый студент',
+        buildings: ['1 здание', '2 здание', '3 здание']
+      },
+      uz: {
+        title: 'TSUL interaktiv xaritasi',
+        subtitle: 'Har bir talaba bilishi kerak bo‘lgan 50 ta nuqta',
+        buildings: ['1-bino', '2-bino', '3-bino']
+      },
+      en: {
+        title: 'TSUL Interactive Map',
+        subtitle: '50 places at the university every student should know',
+        buildings: ['Building 1', 'Building 2', 'Building 3']
+      }
+    };
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('main-title').innerText = translations[lang].title;
+      document.getElementById('main-subtitle').innerText = translations[lang].subtitle;
+      const buildingLabels = document.querySelectorAll('.building-label');
+      buildingLabels.forEach((el, idx) => {
+        el.innerText = translations[lang].buildings[idx];
+      });
+    }
+
+    function toggleBuilding(buildingId) {
+      const building = document.getElementById(buildingId);
+      if (building) {
+        building.classList.toggle('hidden');
+        building.classList.toggle('show');
+      }
+    }
+  </script>
+</head>
+<body class="font-sans">
+  <div class="p-6">
+    <header class="text-center py-6">
+      <div class="flex justify-end space-x-2 mb-4">
+        <button onclick="setLang('ru')" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 shadow">Рус</button>
+        <button onclick="setLang('uz')" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 shadow">O'z</button>
+        <button onclick="setLang('en')" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 shadow">Eng</button>
+      </div>
+      <h1 id="main-title" class="text-5xl font-extrabold text-blue-900 drop-shadow">Интерактивная карта TSUL</h1>
+      <p id="main-subtitle" class="text-xl mt-2 text-gray-700 font-medium">50 точек в университете, которые должен знать каждый студент</p>
+    </header>
+
+    <main class="container mx-auto space-y-8">
+      <!-- Здание 1 -->
+      <section class="bg-white/80 rounded-2xl shadow p-6 fade">
+        <button onclick="toggleBuilding('building1')" class="w-full text-left text-2xl font-semibold text-blue-700 hover:text-blue-900 transition duration-300 flex items-center">
+          <i class="fas fa-university mr-3"></i><span class="building-label">1 здание</span>
+        </button>
+        <div id="building1" class="hidden mt-4 space-y-4">
+          <div class="text-gray-700">Адрес: Ташкент, ул. Сайилгох, 35/2</div>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>114 кабинет:</strong> Кафедра английского права и Европейского союза — обучение праву ЕС, программа Jean Monnet</li>
+            <li><strong>113 кабинет:</strong> Кафедра уголовного права — 5 дисциплин, устоз-шогирд</li>
+            <li><strong>110 кабинет:</strong> Бухгалтерия — учёт, стипендии</li>
+            <li><strong>104 кабинет:</strong> Главный бухгалтер — управление отделом</li>
+            <li><strong>109 кабинет:</strong> Канцелярия (девонхона) — приём документов</li>
+            <li><strong>102 кабинет:</strong> Бухгалтерия и маркетинг — договоры и платное обучение</li>
+            <li><strong>101 кабинет:</strong> Ректор по финансовым вопросам — Иминов Азизулла</li>
+            <li><strong>203 кабинет:</strong> Белый конференц-зал</li>
+            <li><strong>208 кабинет:</strong> Синий зал — лекции и конференции</li>
+            <li><strong>303 кабинет:</strong> Корейский центр — язык и право</li>
+            <li><strong>307 кабинет:</strong> Совет академической честности — проверка ИК/ПК</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Здание 2 -->
+      <section class="bg-white/80 rounded-2xl shadow p-6 fade">
+        <button onclick="toggleBuilding('building2')" class="w-full text-left text-2xl font-semibold text-blue-700 hover:text-blue-900 transition duration-300 flex items-center">
+          <i class="fas fa-university mr-3"></i><span class="building-label">2 здание</span>
+        </button>
+        
+            <li><strong>Кабинет 119:</strong> Немецкое право и сравнительные исследования</li>
+            <li><strong>Кабинет 123:</strong> Кафедра публичного права</li>
+            <li><strong>Кабинет 217:</strong> Деканат уголовного правосудия</li>
+            <li><strong>Кабинет 211A:</strong> Управление непрерывного образования</li>
+            <li><strong>Кабинет 211:</strong> Кабинет адвокатуры</li>
+            <li><strong>Кабинет 210:</strong> Международное сотрудничество — обмены, проекты</li>
+            <li><strong>Кабинет 208:</strong> Кафедра суда и правоохранительных органов</li>
+            <li><strong>Кабинет 206:</strong> Общеобразовательные дисциплины</li>
+            <li><strong>Кабинет 207:</strong> Учебная комната им. Б. Мустафаева</li>
+            <li><strong>Кабинет 204:</strong> Moot court room (Зал заседаний)</li>
+            <li><strong>Кабинет 202:</strong> Проректор Ахтам Нусратиллоевич</li>
+            <li><strong>Кабинет 115:</strong> Редакционно-издательский отдел</li>
+            <li><strong>Кабинет типографии:</strong></li>
+            <li><strong>Кабинет 311:</strong> Редакционно-издательский отдел для студентов — печатают книги, статьи, научные работы</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Здание 3 -->
+      <section class="bg-white/80 rounded-2xl shadow p-6 fade">
+        <button onclick="toggleBuilding('building3')" class="w-full text-left text-2xl font-semibold text-blue-700 hover:text-blue-900 transition duration-300 flex items-center">
+          <i class="fas fa-university mr-3"></i><span class="building-label">3 здание</span>
+        </button>
+        <div id="building3" class="hidden mt-4 space-y-4">
+          <div class="text-gray-700">Адрес: Ташкент, ул. Амира Темура, 13</div>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>Кабинет 202:</strong> Кафедра гражданского права</li>
+            <li><strong>Кабинет 202B:</strong> Центр профобучения</li>
+            <li><strong>Кабинет 202A:</strong> Госуправление</li>
+            <li><strong>Кабинет 206:</strong> Советник по вопросам женщин</li>
+            <li><strong>Кабинет 211:</strong> Узбекский язык и литература</li>
+            <li><strong>Кабинет 212:</strong> Кафедра иностранных языков</li>
+            <li><strong>Кабинет 213:</strong> Декан международного права — Д. Умарханова</li>
+            <li><strong>Кабинет 216:</strong> Факультет международного права</li>
+            <li><strong>Кабинет 223:</strong> Радиоузел</li>
+            <li><strong>Кабинет 224:</strong> Теория государства и права</li>
+            <li><strong>Кабинет 225:</strong> Мультимедийный центр</li>
+            <li><strong>Кабинет 227:</strong> Электронный университет</li>
+            <li><strong>Кабинет 232:</strong> Проректор по науке — Б. Ходжаев</li>
+            <li><strong>Кабинет 236:</strong> Психолог — Ф. Шарипова</li>
+            <li><strong>Кабинет 221:</strong> Конференц-зал</li>
+            <li><strong>Библиотека:</strong> TSUL Library</li>
+            <li><strong>Учебно-методическое управление</strong></li>
+            <li><strong>Кабинет 120:</strong> Центр духовности и просвещения</li>
+            <li><strong>Кабинет 121A:</strong> Ассоциация студентов и Союз молодёжи</li>
+            <li><strong>Кабинет 112:</strong> Проректор по работе с молодёжью</li>
+            <li><strong>Спортзал:</strong> Спортивный комплекс</li>
+            <li><strong>Кабинет 105:</strong> Международное право и права человека</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
